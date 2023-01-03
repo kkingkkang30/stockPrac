@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class StockServiceTest {
 
     @Autowired
-    private StockService stockService;
+    private PessimisticLockStockService stockService;
 
     @Autowired
     private StockRepository stockRepository;
@@ -60,9 +60,7 @@ class StockServiceTest {
         }
 
         latch.await();
-
         Stock stock = stockRepository.findById(1L).orElseThrow();
-
         assertEquals(0L, stock.getQuantity());
     }
 }
